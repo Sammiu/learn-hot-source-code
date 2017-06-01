@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mvvm</title>
+    <script type="text/javascript" src="js/dep.js"></script>
+    <script type="text/javascript" src="js/observe.js"></script>
+    <script type="text/javascript" src="js/watcher.js"></script>
+    <script type="text/javascript" src="js/compile.js"></script>
+    <script type="text/javascript" src="js/mvvm.js"></script>
+</head>
+<body>
+<div id="mvvm-app">
+    <input type="text" v-model="word">
+    <p>{{word}}</p>
+    <button v-on:click="sayHi">change model</button>
+    <select v-model="type">
+        <option value="212">212</option>
+        <option value="42342">42342</option>
+        <option value="2423412">2423412</option>
+    </select>
+    {{type}}
+</div>
+<script type="text/javascript" src="js/app.js"></script>
+</body>
+</html>

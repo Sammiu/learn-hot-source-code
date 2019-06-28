@@ -1,4 +1,4 @@
-import {isObject} from 'utils/typeofUtil'
+
 
 /**
  * 映射视图模型
@@ -7,15 +7,8 @@ import {isObject} from 'utils/typeofUtil'
  * @param {Object} viewModelProps 视图模型
  * */
 export function mappingToViewModel(data, viewModelProps) {
-
     if (Array.isArray(data)) {
-        return data.map(o => {
-            if (Array.isArray(o)) {
-                return mappingToViewModel(o, viewModelProps);
-            } else {
-                return dataToViewModel(o, viewModelProps)
-            }
-        })
+        return data.map(o => mappingToViewModel(o, viewModelProps))
     } else if (isObject(data)) {
         return dataToViewModel(data, viewModelProps)
     } else {
@@ -38,17 +31,18 @@ export function dataToViewModel(data, viewModelProps) {
         if (isObject(key)) {
             model[prop] = mappingToViewModel(data[key['$$prop']], viewModelProps[prop])
         } else if (data.hasOwnProperty(key) && key !== '$$prop') {
-            if (Array.isArray(data[key]) || isObject(data[key])) {
-                model[prop] = mappingToViewModel(data[key], viewModelProps[prop])
-            } else {
-                model[prop] = data[key]
-            }
+            model[prop] = mappingToViewModel(data[key], viewModelProps[prop])
         }
     }
 
     return model;
 }
 
+/**
+ * 是否是一个对象
+ *
+ * @param {Object} objectToCheck
+ * */
 function isObject(objectToCheck) {
     return objectToCheck && {}.toString.call(objectToCheck) === '[object Object]'
 }

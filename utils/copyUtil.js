@@ -7,24 +7,14 @@ function deepCopy(data) {
     if (Array.isArray(data)) {
         return data.map(item => deepCopy(item))
     } else if (isObject(data)) {
-        return deepCopyObject(data)
+        const newObj = {};
+        for (let index in data) {
+            newObj[index] = deepCopy(data[index])
+        }
+        return newObj;
     } else {
         return data
     }
-}
-
-
-/**
- * Object 深拷贝
- *
- * @param {Object} obj
- * */
-function deepCopyObject(obj) {
-    const newObj = {};
-    for (let index in obj) {
-        newObj[index] = deepCopy(obj[index])
-    }
-    return newObj;
 }
 
 /**

@@ -46,3 +46,47 @@ export function dataToViewModel(data, viewModelProps) {
 function isObject(objectToCheck) {
     return objectToCheck && {}.toString.call(objectToCheck) === '[object Object]'
 }
+
+const mappingProps = {
+    data: {
+        $$prop: 'rows',
+        code: 'orderCode',
+        id: 'orderId',
+        status: 'orderStatus',
+        arr: {
+            $$prop: 'items',
+            toName: 'name',
+            toValue: 'value',
+        }
+    }
+};
+
+const data = {
+    "rows": [{
+        "orderCode": "600231631980089575",
+        "orderStatus": 5,
+        "orderId": "1d9db629c4bf41bbbc6b1a344fc9c61d",
+        "items": [
+            {name: '600231631980089575--1', value: 'gfdgdfg'},
+            {name: '600231631980089575--2', value: 'gdfgdfghjfg'}
+        ]
+    }, {
+        "orderCode": "600231622720091155",
+        "orderStatus": 6,
+        "orderId": "6290382a2a994da6bd86a9fc84001e4a",
+        "items": [
+            {name: '600231622720091155--1', value: '哈哈哈'},
+            {name: '600231622720091155--2', value: '呵呵呵'}
+        ]
+    }, {
+        "orderCode": "600231622770090901",
+        "orderStatus": 5,
+        "orderId": "29326259ab8347e0b07e31cee6a0760f"
+        "items": [
+            {name: '600231622770090901--1', value: '嗯嗯嗯'},
+            {name: '600231622770090901--2', value: '哦哦哦'}
+        ]
+    }]
+};
+
+console.log(mappingToViewModel(data, mappingProps));

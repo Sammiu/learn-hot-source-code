@@ -59,7 +59,7 @@ export function onlyInputNotChineseCharacters(value: string): string {
  * @param {string} value 值
  * */
 export function verifyIDCardNo(value: string): boolean {
-    return /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{4}$/.test(value)
+    return /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/.test(value)
 }
 
 /**
@@ -107,6 +107,3 @@ export function verifyAlphanumericCombination(value: string): boolean {
 export function verifyAlphanumeric(value: string): boolean {
     return /^(([A-Za-z]+)|([0-9]+))[A-Za-z0-9]*$/.test(value)
 }
-
-
-

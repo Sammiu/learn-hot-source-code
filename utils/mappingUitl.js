@@ -1,41 +1,52 @@
 
-
 /**
- * 映射视图模型
+ * 映射数据模型 --
+ * 由于mappingToViewModel命名有歧义 现扩展mappingToModel 为过渡性方案
+ * 届时将删除 mappingToViewModel, 全部改成 mappingToModel 调用
  *
  * @param {Array, Object} data 数据模型
- * @param {Object} viewModelProps 视图模型
+ * @param {Object} mappingProps 视图模型
  * */
-export function mappingToViewModel(data, viewModelProps) {
-    if (Array.isArray(data)) {
-        return data.map(o => mappingToViewModel(o, viewModelProps))
-    } else if (isObject(data)) {
-        return dataToViewModel(data, viewModelProps)
-    } else {
-        return data
-    }
+export function mappingToModel(data, mappingProps) {
+   if (Array.isArray(data)) {
+    return data.map(o => {
+      if (Array.isArray(o)) {
+        return mappingToModel(o, mappingProps);
+      } else {
+        return dataToModel(o, mappingProps)
+      }
+    })
+  } else if (isObject(data)) {
+    return dataToModel(data, mappingProps)
+  } else {
+    return data
+  }
 }
 
 /**
  * 数据转视图模型
  *
  * @param {Array, Object} data
- * @param {Object} viewModelProps
+ * @param {Object} mappingProps
  * */
-export function dataToViewModel(data, viewModelProps) {
-    const model = {};
+export function dataToModel(data, mappingProps) {
+  const model = {};
 
-    for (let prop in viewModelProps) {
-        const key = viewModelProps[prop];
-        /** 如果映射的是一个Object 说明是数据存在嵌套 */
-        if (isObject(key)) {
-            model[prop] = mappingToViewModel(data[key['$$prop']], viewModelProps[prop])
-        } else if (data.hasOwnProperty(key) && key !== '$$prop') {
-            model[prop] = mappingToViewModel(data[key], viewModelProps[prop])
-        }
+  for (let prop in mappingProps) {
+    const key = mappingProps[prop];
+    /** 如果映射的是一个Object 说明是数据存在嵌套 */
+    if (isObject(key)) {
+      model[prop] = mappingToModel(data[key['$$prop']], mappingProps[prop])
+    } else if (data.hasOwnProperty(key) && key !== '$$prop') {
+      if (Array.isArray(data[key]) || isObject(data[key])) {
+        model[prop] = mappingToModel(data[key], mappingProps[prop])
+      } else {
+        model[prop] = data[key]
+      }
     }
+  }
 
-    return model;
+  return model;
 }
 
 /**
@@ -89,4 +100,4 @@ const data = {
     }]
 };
 
-console.log(mappingToViewModel(data, mappingProps));
+console.log(mappingToModel(data, mappingProps));

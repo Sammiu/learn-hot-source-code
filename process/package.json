@@ -1,0 +1,15 @@
+{
+  "name": "process-ipc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "master.js",
+  "scripts": {
+    "start": "node master.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "koa": "^2.11.0"
+  }
+}

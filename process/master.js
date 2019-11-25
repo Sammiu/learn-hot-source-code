@@ -60,18 +60,30 @@ server.on('listening', function (res) {
 });
 
 /**
- * 主进程异常事件
+ * 主进程服务异常
  * */
 server.on('error', function (exception) {
 });
 
 
+/**
+ * 主进程异常事件
+ * */
 cpus.forEach(() => {
+
+});
+
+/**
+ * 创建工作进程
+ * */
+const createWorker = () => {
   const worker = fork('worker.js');
   workers[worker.pid] = worker;
 
   worker.on('message', function (message) {
-
+    if (message.accept === 'suicide') {
+      createWorker();
+    }
   });
 
   worker.on('exit', function () {
@@ -79,7 +91,7 @@ cpus.forEach(() => {
   });
 
   worker.send('connectServer')
-});
+};
 
 /**
  * 主进程退出处理
@@ -90,7 +102,8 @@ const processExitHandle = code => {
     Object.keys(workers).forEach(pid => {
       console.log('master process exited, kill worker pid: ', pid);
       workers[pid].kill('SIGINT');
-    });
+      delete workers[pid];
+    })
   }
 
   process.exit(0);

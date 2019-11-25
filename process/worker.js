@@ -44,5 +44,6 @@ process.on('message', function (message) {
 process.on('uncaughtException', function (err) {
   console.log('err');
   client.destroy();
+  process.send({accept: 'suicide'});
   process.exit(1);
 });

@@ -1,0 +1,183 @@
+.App {
+    text-align: center;
+}
+
+.tool-button__wrap {
+    margin: 30px auto;
+}
+
+.tool-btn {
+    line-height: 1.5;
+    position: relative;
+    display: inline-block;
+    font-weight: 400;
+    white-space: nowrap;
+    text-align: center;
+    background-image: none;
+    border: 1px solid transparent;
+    -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+    cursor: pointer;
+    -webkit-transition: all .3s cubic-bezier(.645, .045, .355, 1);
+    transition: all .3s cubic-bezier(.645, .045, .355, 1);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    height: 32px;
+    padding: 0 15px;
+    font-size: 14px;
+    border-radius: 4px;
+    color: rgba(0, 0, 0, 0.65);
+    background-color: #fff;
+}
+
+.tool-btn-primary {
+    color: #fff;
+    background-color: #1890ff;
+    border-color: #1890ff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+    -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+}
+
+.tool-btn-primary:hover, .tool-btn-primary:focus {
+    color: #fff;
+    background-color: #40a9ff;
+    border-color: #40a9ff;
+}
+
+button:after {
+    border: 0 none;
+    opacity: 0;
+    animation: none 0 ease;
+}
+
+.animate__wrap {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin: 0 auto;
+    padding: 10px 0 0 20px;
+    width: 900px;
+    min-height: 150px;
+    background-color: #fff;
+    border: 1px solid #e1e1e1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .1);
+    box-sizing: border-box;
+    transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+}
+
+.animate-item__wrap {
+    display: flex;
+    margin: 0 20px 20px 0;
+    width: 80px;
+    height: 70px;
+    border-radius: 4px;
+    align-items: center;
+    justify-content: center;
+    background-color: #20a0ff;
+    text-align: center;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+.animate-item__wrap:hover .icon {
+    opacity: 1;
+    transition: opacity .15s ease-in;
+}
+
+.animate-item__wrap .icon {
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity .2s ease-out;
+}
+
+
+.animate-item {
+    display: none
+}
+
+.item__wrap_leave, .item__wrap_enter {
+    animation-duration: .3s;
+    -webkit-animation-duration: .3s;
+    animation-timing-function: cubic-bezier(0.78, 0.14, 0.15, 0.86);
+    -webkit-animation-timing-function: cubic-bezier(0.78, 0.14, 0.15, 0.86)
+}
+
+.item__wrap-animate-enter {
+    animation-name: uploadAnimateInlineIn;
+    -moz-animation-name: uploadAnimateInlineIn;
+    -o-animation-name: uploadAnimateInlineIn;
+    -webkit-animation-name: uploadAnimateInlineIn;
+}
+
+.item__wrap-animate-leave {
+    -webkit-animation-name: uploadAnimateInlineOut;
+    animation-name: uploadAnimateInlineOut
+}
+
+
+@keyframes uploadAnimateInlineIn {
+    from {
+        width: 0;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        opacity: 0;
+    }
+}
+
+
+@-webkit-keyframes uploadAnimateInlineIn {
+    from {
+        width: 0;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        opacity: 0;
+    }
+}
+
+@-ms-keyframes uploadAnimateInlineIn {
+    from {
+        width: 0;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        opacity: 0;
+    }
+}
+
+@-o-keyframes uploadAnimateInlineIn {
+    from {
+        width: 0;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        opacity: 0;
+    }
+}
+
+@-moz-keyframes uploadAnimateInlineIn {
+    from {
+        width: 0;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        opacity: 0;
+    }
+}
+
+@keyframes uploadAnimateInlineOut {
+    to {
+        width: 0;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        opacity: 0;
+    }
+}

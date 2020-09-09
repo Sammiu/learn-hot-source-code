@@ -55,9 +55,9 @@
 
     if (elements[lIndex] > elements[i] && elements[rIndex] > elements[i]) {
       return elements[lIndex] > elements[rIndex] ? lIndex : rIndex
-    } else if (elements[lIndex] > elements[i] && elements[lIndex] !== undefined) {
+    } else if (elements[lIndex] > elements[i] && lIndex <= n) {
       return lIndex
-    } else if (elements[rIndex] > elements[i] && elements[rIndex] !== undefined) {
+    } else if (elements[rIndex] > elements[i] && rIndex <= n) {
       return rIndex
     } else {
       return i
@@ -86,7 +86,7 @@
     const maxElem = elements[0]
     elements[0] = elements[elements.length - 1]
     elements.pop()
-    percolateDown(elements.length - 1, 0)
+    percolateDown(elements.length, 0)
     return maxElem
   }
 
@@ -94,7 +94,7 @@
    * 二叉堆化
    * */
   function heapify () {
-    const len = elements.length - 1
+    const len = elements.length
     for (let i = lastInternal(len); i >= 0; i--) {
       percolateDown(len, i)
     }

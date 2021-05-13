@@ -128,3 +128,38 @@ export default class BaseService {
         }
     }
 }
+
+export function createAjax(onopen?: any, onclose?: any): Function {
+  const socket: WebSocket = new WebSocket('ws://192.168.168.31:2345/services')
+  const callbacks: any = {}
+  const message = (event) => onmessage(event, callbacks)
+  socket.addEventListener('open', onopen)
+  socket.addEventListener('close', onclose)
+  socket.addEventListener('message', message)
+
+  return function (service, dataType, args?) {
+    return new Promise(((resolve, reject) => {
+      let rpdId
+      do {
+        rpdId = Math.floor(Math.random() * 100000)
+      } while (callbacks[rpdId])
+      callbacks[rpdId] = {resolve, reject}
+      socket.send(JSON.stringify({cmd: 3, data: {rpcId: rpdId, dataType: dataType, ...args}}))
+    }))
+  }
+}
+
+
+function onmessage(event: MessageEvent, callbacks: any) {
+  try {
+    const response: any = JSON.parse(event.data)
+    const promise = callbacks[response.rpdId]
+    delete callbacks[response.rpdId]
+    if (response.data) {
+      promise.resolve(response.data)
+    } else {
+      promise.reject(response.err)
+    }
+  } catch (e) {
+  }
+}
